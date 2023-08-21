@@ -5,17 +5,15 @@ export default async function fetchAll(req, res) {
   try {
     // Get the token from the authorization header
     const authHeader = req.headers.authorization;
+    const token = authHeader.split(" ")[1];
 
     // Check if the token is present
-    if (!authHeader) {
+    if (!token) {
       return res.status(401).send({
         status: "failure",
         message: "Token not provided",
       });
     }
-
-    // Extract the token from the "Bearer <token>" format
-    const token = authHeader.split(" ")[1];
 
     // Verify the JWT token
     const decodedToken = jwt.verify(token, process.env.secret);
@@ -41,14 +39,14 @@ export default async function fetchAll(req, res) {
       const { user_id, name, exams } = student;
       const examsWithDetails = exams.map((exam) => {
         const { mark1, mark2, mark3 } = exam;
-        const total = mark1 + mark2 + mark3; // Calculate total
+        const total = mark1 + mark2 + mark3;
         return {
           exam_name: exam.exam_name,
           mark1,
           mark2,
           mark3,
           total,
-          rank: exam.rank, // Use the rank from the exam record
+          rank: exam.rank, // Using the rank from the exam record
         };
       });
       return {

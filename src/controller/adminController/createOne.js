@@ -5,8 +5,6 @@ export default async function createExams(req, res) {
   try {
     // Get the token from the authorization header
     const authHeader = req.headers.authorization;
-
-    // Extract the token from the "Bearer <token>" format
     const token = authHeader.split(" ")[1];
 
     // Check if the token is present

@@ -1,5 +1,5 @@
 import prisma from "../../db/client.js";
-import jwt from "jsonwebtoken"; // Don't forget to import jwt
+import jwt from "jsonwebtoken";
 
 export default async function deleteOne(req, res) {
   // Get the token from the authorization header

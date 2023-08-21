@@ -55,11 +55,12 @@ export default async function publishResult(req, res) {
         examRankMap[exam_name] = [];
       }
 
-      const totalMarks = mark1 + mark2 + mark3; // Calculate total marks
+      const totalMarks = mark1 + mark2 + mark3;
+
       examRankMap[exam_name].push({
         user_id: users.id,
-        total: totalMarks, // Assign the calculated total marks
-        username: users.username, // Include username
+        total: totalMarks,
+        username: users.username,
         examDetails: { mark1, mark2, mark3 },
       });
     }
@@ -68,6 +69,7 @@ export default async function publishResult(req, res) {
     for (const examName in examRankMap) {
       const examResults = examRankMap[examName];
       examResults.sort((a, b) => b.total - a.total); // Sort by total marks in descending order
+
       examResults.forEach((student, index) => {
         student.rank = index + 1;
       });

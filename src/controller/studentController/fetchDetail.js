@@ -6,7 +6,7 @@ export default async function fetchStudentDetail(req, res) {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.secret);
 
-  // Check if the user has admin role
+  // Check if the user has student role
   if (decodedToken.role !== "student") {
     return res.status(403).send({
       status: "failure",
